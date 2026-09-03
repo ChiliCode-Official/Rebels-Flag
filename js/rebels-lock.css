@@ -161,3 +161,18 @@
     height: 38px;
   }
 }
+
+
+/* FORZAR IMAGEN DE RENDIRSE NO ES UNA OPCION */
+[data-framer-name="Giving Up Section"] img,
+[data-framer-name*="Giving"] img,
+[data-framer-name*="Podcast"] img,
+section:has(h2:contains("Rendirse")) img {
+  content: url("../framerusercontent.com/images/giving_up_bg.jpg") !important;
+  object-fit: cover !important;
+}
+
+img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"] {
+  content: url("../framerusercontent.com/images/giving_up_bg.jpg") !important;
+  object-fit: cover !important;
+}
