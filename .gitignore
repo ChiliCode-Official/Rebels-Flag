@@ -1,0 +1,28 @@
+# Sistema operativo y archivos temporales
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.temp
+*.log
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Node / dependencias (en caso de usar build tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de respaldo y descargas temporales
+*.bak
+*.whtt
+hts-cache/
+hts-log.txt
