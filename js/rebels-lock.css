@@ -178,3 +178,161 @@ img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
   object-fit: cover !important;
   object-position: 50% 18% !important;
 }
+/* =========================================================
+   REBELS MOBILE RESPONSIVE ENHANCEMENTS & DRAWER MENU
+   ========================================================= */
+
+@media (max-width: 991px) {
+  /* 1. Navbar & Header */
+  .framer-MQpCu, .framer-XemAD, nav {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Asegurar logo visible y proporcionado en móvil */
+  [data-framer-name="Default"] [data-framer-background-image-wrapper="true"] img,
+  .framer-uhmzak img {
+    max-height: 32px !important;
+    max-width: 120px !important;
+  }
+
+  /* 2. Hero Section Mobile Optimization */
+  [data-framer-name="Title"] h1::after {
+    font-size: 38px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -1px !important;
+    word-break: break-word !important;
+  }
+
+  /* Ajuste de paddings para que nada se desborde */
+  [data-framer-name="Banner Section"],
+  [data-framer-name="Text Wrapper"],
+  [data-framer-name="Title Wrapper"] {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Imagen de Hero en móvil: tamaño y proporción perfectos */
+  [data-framer-name="Image Wrapper"],
+  [data-framer-name="Gap Block Bottom"] {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 340px !important;
+    max-height: 460px !important;
+  }
+
+  [data-framer-name="Image Wrapper"] img,
+  [data-framer-name="Gap Block Bottom"] img {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  /* 3. Botones Hero en móvil: apilados o con touch target cómodo */
+  [data-framer-name="Buttons Wrapper"] {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  [data-framer-name="Buttons Wrapper"] a,
+  [data-framer-name="Buttons Wrapper"] button {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+    padding: 14px 20px !important;
+  }
+
+  /* 4. Ticker superior móvil */
+  .framer-70Sgs, [data-framer-name="Banner Section"] .framer-1fh6fq3 {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+  }
+
+  /* 5. Countdown / Próximo Partido móvil */
+  [data-framer-name="Countdown Section"] {
+    padding: 30px 16px !important;
+  }
+
+  [data-framer-name="Countdown Wrapper"],
+  [data-framer-name="Top Wrapper"],
+  [data-framer-name="Bottom Wrapper"] {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+
+  /* Cajas de cuenta regresiva (DÍAS, HORAS, MINUTOS, SEGUNDOS) */
+  [data-framer-name="Bottom Wrapper"] > div {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+  }
+
+  /* 6. Banner de Sponsors Móvil */
+  .rebels-sponsors-bar {
+    padding: 24px 0 !important;
+  }
+  .rebels-sponsors-track {
+    gap: 45px !important;
+    animation-duration: 18s !important;
+  }
+  .sponsor-solo-img.main {
+    height: 46px !important;
+    max-width: 130px !important;
+  }
+  .sponsor-solo-img {
+    height: 34px !important;
+    max-width: 105px !important;
+  }
+
+  /* 7. Sección de Rendirse no es una opción móvil */
+  [data-framer-name*="Giving"] h2 {
+    font-size: 32px !important;
+    line-height: 1.1 !important;
+  }
+
+  /* 8. Tarjetas de Partidos y Tienda Móvil */
+  [data-framer-name="Cards Wrapper"],
+  [data-framer-name="Results Wrapper"],
+  [data-framer-name="Collections Wrapper"] {
+    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 16px !important;
+  }
+
+  /* 9. Footer móvil */
+  [data-framer-name="Nav Wrapper"],
+  [data-framer-name="Copyright Wrapper"] {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 16px !important;
+    align-items: center !important;
+  }
+}
+
+/* Teléfonos muy compactos (iPhone SE, Galaxy A, etc. < 480px) */
+@media (max-width: 480px) {
+  [data-framer-name="Title"] h1::after {
+    font-size: 30px !important;
+  }
+  .rebels-sponsors-label {
+    font-size: 10px !important;
+    letter-spacing: 1.5px !important;
+  }
+  [data-framer-name="Bottom Wrapper"] > div {
+    gap: 6px !important;
+  }
+}
