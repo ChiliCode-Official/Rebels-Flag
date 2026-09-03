@@ -1,46 +1,58 @@
-/* REBELS THEME: Azul Rayo & Logo Image Customizations */
+/* REBELS THEME: Azul Rayo & Hero Customizations on Original Template */
 
-/* 1. Global Tokens: Replace Neon Green with Electric Lightning Blue */
+/* 1. Global Color Tokens: Azul Rayo */
 :root, body, #main {
-  --token-4846de85-d59f-4c4f-b238-cad5652fda1a: #00d2ff !important; /* Azul Rayo Eléctrico */
-  --token-c1fd598a-a8c6-4c58-86f6-691db815bc7a: #0099ff !important; /* Azul Rayo secundario */
-  --token-1b548128-02bc-4d93-99ae-e88ffe080711: #0a192f !important; /* Fondo deportivo azul oscuro */
+  --token-4846de85-d59f-4c4f-b238-cad5652fda1a: #00d2ff !important;
+  --token-c1fd598a-a8c6-4c58-86f6-691db815bc7a: #0099ff !important;
+  --token-1b548128-02bc-4d93-99ae-e88ffe080711: #0a192f !important;
 }
 
-/* 2. Logo in Navbar & Footer: Render the official 'logo rebel.png' */
-[data-framer-name="Default"] [data-framer-background-image-wrapper="true"],
-.framer-uhmzak [data-framer-background-image-wrapper="true"] {
-  position: relative !important;
-  display: flex !important;
-  align-items: center !important;
-  overflow: visible !important;
+/* 2. Hero Headline Text Override (so React doesn't overwrite your phrase) */
+[data-framer-name="Title"] h1 {
+  font-size: 0 !important;
+  line-height: 0 !important;
 }
 
-[data-framer-name="Default"] [data-framer-background-image-wrapper="true"] img,
-.framer-uhmzak [data-framer-background-image-wrapper="true"] img {
-  opacity: 1 !important;
+[data-framer-name="Title"] h1::after {
+  content: "La rebeldía es un síntoma de inteligencia." !important;
   display: block !important;
-  pointer-events: auto !important;
+  font-size: 84px !important;
+  line-height: 0.95 !important;
+  font-family: 'Bricolage Grotesque', sans-serif !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  letter-spacing: -2px !important;
+}
+
+@media (max-width: 1200px) {
+  [data-framer-name="Title"] h1::after {
+    font-size: 64px !important;
+  }
+}
+
+@media (max-width: 800px) {
+  [data-framer-name="Title"] h1::after {
+    font-size: 42px !important;
+  }
+}
+
+/* 3. Hero Image Override (forces your Imgur photo) */
+[data-framer-name="Image Wrapper"] img,
+[data-framer-name="Gap Block Bottom"] img {
+  content: url("../framerusercontent.com/images/rebels_hero.jpg") !important;
+  object-fit: cover !important;
+}
+
+/* 4. Logo Override: Official logo_rebel.png */
+[data-framer-name="Default"] [data-framer-background-image-wrapper="true"] img,
+.framer-uhmzak img {
   content: url("../framerusercontent.com/images/logo_rebel.png") !important;
-  max-height: 44px !important;
+  max-height: 38px !important;
   width: auto !important;
   object-fit: contain !important;
-  filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.4)) !important;
 }
 
-/* In case pseudo-element was showing, hide it in favor of the real PNG */
-[data-framer-name="Default"] [data-framer-background-image-wrapper="true"]::before {
-  display: none !important;
-}
-
-/* 3. Hero CTA Buttons / Highlights */
-button, .framer-od6h08, [data-framer-name="Get in Touch"] {
-  background-color: #00d2ff !important;
-  color: #000000 !important;
-  font-weight: 700 !important;
-}
-
-/* 4. Live Scoreboard floating badge */
+/* 5. Live Scoreboard badge */
 #rebels-live-scoreboard {
   border-color: #00d2ff !important;
   box-shadow: 0 10px 35px rgba(0, 210, 255, 0.4) !important;
