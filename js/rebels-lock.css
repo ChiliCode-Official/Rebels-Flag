@@ -172,7 +172,9 @@ section:has(h2:contains("Rendirse")) img {
   object-fit: cover !important;
 }
 
-img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"] {
+img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
+[data-framer-name*="Giving"] img {
   content: url("../framerusercontent.com/images/giving_up_bg.jpg") !important;
   object-fit: cover !important;
+  object-position: 50% 18% !important;
 }
