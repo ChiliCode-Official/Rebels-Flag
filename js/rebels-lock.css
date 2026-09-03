@@ -60,3 +60,78 @@
 #rebels-live-scoreboard .live-title, #rebels-live-scoreboard strong {
   color: #00d2ff !important;
 }
+/* SPONSORS CAROUSEL SECTION */
+.sponsors-section {
+  width: 100%;
+  background: #090909;
+  border-top: 1px solid var(--token-efcf8159-8455-43d8-8d8c-d3895d69ecf1, #262626);
+  border-bottom: 1px solid var(--token-efcf8159-8455-43d8-8d8c-d3895d69ecf1, #262626);
+  padding: 36px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.sponsors-title {
+  text-align: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--token-5b9e2bdb-fb42-4b70-afbd-11869d027423, #8f8f8f);
+  margin-bottom: 24px;
+}
+
+.sponsors-track {
+  display: flex;
+  width: max-content;
+  animation: scrollSponsors 24s linear infinite;
+  gap: 60px;
+  align-items: center;
+}
+
+.sponsors-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollSponsors {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.sponsor-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sponsor-item:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.sponsor-icon {
+  font-size: 24px;
+}
+
+.sponsor-name {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.sponsor-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--token-4846de85-d59f-4c4f-b238-cad5652fda1a, #00d2ff);
+  background: rgba(0, 210, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 210, 255, 0.2);
+}
