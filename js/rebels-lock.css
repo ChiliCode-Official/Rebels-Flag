@@ -1,5 +1,5 @@
 /* =========================================================
-   REBELS FLAG FOOTBALL CLUB - MASTER DESIGN SYSTEM
+   REBELS FLAG FOOTBALL CLUB - MASTER DESIGN SYSTEM (FINAL LOCK)
    ========================================================= */
 
 /* 1. Global Color Tokens: Azul Rayo & Dark Mode */
@@ -126,181 +126,8 @@ img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
 }
 
 /* =========================================================
-   7. ADAPTACIÓN RESPONSIVE ELEGANTE Y LIMPIA PARA MÓVILES
+   7. SECCIÓN DE FOTOGRAFÍA: LUIS MOMENTS
    ========================================================= */
-@media (max-width: 991.98px) {
-  /* Evitar cualquier desborde horizontal en móviles */
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-  }
-
-  /* El texto SIEMPRE debe tener espacio horizontal normal y no romperse letra por letra */
-  p, h1, h2, h3, h4, h5, h6, span, a, div {
-    word-break: normal !important;
-    overflow-wrap: break-word !important;
-    white-space: normal !important;
-  }
-
-  /* Ajustar tamaño de título Hero en pantallas móviles */
-  [data-framer-name="Title"] h1,
-  h1.framer-styles-preset-lx00h8 {
-    font-size: 44px !important;
-    line-height: 1.05 !important;
-    letter-spacing: -1.5px !important;
-  }
-
-  /* Ajuste de los sponsors en móvil */
-  .rebels-sponsors-bar {
-    padding: 22px 0 !important;
-  }
-  .rebels-sponsors-track {
-    gap: 45px !important;
-    animation-duration: 18s !important;
-  }
-  .sponsor-solo-img.main {
-    height: 44px !important;
-    max-width: 130px !important;
-  }
-  .sponsor-solo-img {
-    height: 34px !important;
-    max-width: 100px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  [data-framer-name="Title"] h1,
-  h1.framer-styles-preset-lx00h8 {
-    font-size: 34px !important;
-    line-height: 1.08 !important;
-    letter-spacing: -1px !important;
-  }
-}
-
-/* =========================================================
-   HERO MOBILE REDESIGN: IMAGEN DE FONDO + TEXTO AL FRENTE
-   (Solo activo en telefonos / pantallas moviles < 768px)
-   ========================================================= */
-
-@media (max-width: 767.98px) {
-  /* Contenedor principal de la seccion Hero */
-  [data-framer-name="Banner Section"] {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    min-height: 85vh !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    background: #090909 !important;
-  }
-
-  /* 1. Imagen detras cubriendo todo el fondo */
-  [data-framer-name="Image Wrapper"],
-  [data-framer-name="Gap Block Bottom"] {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 1 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  [data-framer-name="Image Wrapper"] img,
-  [data-framer-name="Gap Block Bottom"] img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center top !important;
-    filter: brightness(0.65) contrast(1.1) !important;
-  }
-
-  /* Gradiente oscuro superior e inferior para legibilidad cinematografica */
-  [data-framer-name="Image Wrapper"]::after,
-  [data-framer-name="Banner Section"]::before {
-    content: "" !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: linear-gradient(180deg, rgba(9, 9, 9, 0.4) 0%, rgba(9, 9, 9, 0.2) 40%, rgba(9, 9, 9, 0.95) 90%, #090909 100%) !important;
-    z-index: 2 !important;
-    pointer-events: none !important;
-  }
-
-  /* 2. Bloque de texto y botones ENFRENTE de la imagen */
-  [data-framer-name="Text Wrapper"],
-  [data-framer-name="Title Wrapper"],
-  [data-framer-name="Title & Buttons Wrapper"] {
-    position: relative !important;
-    z-index: 10 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 40px 20px 30px !important;
-    box-sizing: border-box !important;
-    background: transparent !important;
-  }
-
-  /* Titulo del Hero: Gran impacto visual sobre la foto */
-  [data-framer-name="Title"] h1,
-  h1.framer-styles-preset-lx00h8 {
-    font-size: 34px !important;
-    line-height: 1.05 !important;
-    letter-spacing: -1.2px !important;
-    color: #ffffff !important;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8) !important;
-    margin-bottom: 12px !important;
-    display: block !important;
-  }
-
-  /* Subtitulo / lema */
-  [data-framer-name="Title & Buttons Wrapper"] h5,
-  [data-framer-name="Title & Buttons Wrapper"] p {
-    color: #e0e0e0 !important;
-    font-size: 14px !important;
-    line-height: 1.45 !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
-    margin-bottom: 20px !important;
-  }
-
-  /* Botones de accion estilizados en movil */
-  [data-framer-name="Buttons Wrapper"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    width: 100% !important;
-  }
-
-  [data-framer-name="Buttons Wrapper"] a,
-  [data-framer-name="Buttons Wrapper"] button,
-  .framer-1iarows-container a {
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-    padding: 14px 20px !important;
-    border-radius: 8px !important;
-    font-weight: 700 !important;
-    box-sizing: border-box !important;
-    backdrop-filter: blur(8px) !important;
-  }
-
-  /* Boton secundario transparente con borde Azul Rayo */
-  [data-framer-name="Buttons Wrapper"] a:nth-child(2),
-  [data-framer-name="Buttons Wrapper"] button:nth-child(2) {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border: 1px solid rgba(0, 210, 255, 0.5) !important;
-    color: #ffffff !important;
-  }
-}
-
-
-/* =========================================================
-   SECCIÓN: COBERTURA VISUAL Y FOTÓGRAFO OFICIAL LUIS MOMENTS
-   ========================================================= */
-
 .rebels-photographer-section {
   width: 100%;
   background: #0b0b0b;
@@ -457,7 +284,6 @@ img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
   background: rgba(0, 210, 255, 0.05);
 }
 
-/* Tarjeta lateral del Camarógrafo */
 .rebels-photographer-card {
   position: relative;
   width: 320px;
@@ -551,8 +377,43 @@ img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
   color: #000000 !important;
 }
 
-/* Responsivo para móviles */
-@media (max-width: 900px) {
+/* =========================================================
+   8. RESPONSIVE MÓVIL ESTABLE: RESOLUCIÓN DEFINITIVA DE ANCHOS
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+  /* Solución definitiva al bug de 1 letra por línea:
+     Framer aplica flex-basis: 0 o width: 1px en desktop a .framer-1ecgk11 y .framer-cjx2f2.
+     En móvil DEBEN tener width: 100% y flex: none. */
+  .framer-cjx2f2,
+  .framer-1ecgk11,
+  .framer-15g9xg6,
+  .framer-5avx7h,
+  .framer-1hod2yf,
+  [data-framer-name="Base Container"],
+  [data-framer-name="Text Wrapper"],
+  [data-framer-name="Title & Buttons Wrapper"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    box-sizing: border-box !important;
+  }
+
+  /* El texto nunca debe romperse letra por letra */
+  p, h1, h2, h3, h4, h5, h6, span, a, div {
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+  }
+
+  /* Ajuste de títulos y párrafos */
+  [data-framer-name="Title"] h1,
+  h1.framer-styles-preset-lx00h8 {
+    font-size: 36px !important;
+    line-height: 1.1 !important;
+    letter-spacing: -1.2px !important;
+  }
+
   .rebels-photographer-content {
     flex-direction: column;
     align-items: center;
@@ -582,5 +443,14 @@ img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
   .rebels-photographer-card {
     width: 100%;
     max-width: 360px;
+  }
+}
+
+@media (max-width: 480px) {
+  [data-framer-name="Title"] h1,
+  h1.framer-styles-preset-lx00h8 {
+    font-size: 30px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.8px !important;
   }
 }
