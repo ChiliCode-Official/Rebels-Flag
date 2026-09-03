@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rebels Flag - Panel Móvil del Marcador</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Firebase CDN (Spark Free Tier) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --card-bg: #181818;
+      --card-border: #262626;
+      --accent: #c7f849;
+      --accent-hover: #b1e038;
+      --text: #ffffff;
+      --text-muted: #8f8f8f;
+      --danger: #ff4757;
+      --success: #2ed573;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      padding: 16px;
+      padding-bottom: 90px;
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    .brand-badge {
+      background: var(--accent);
+      color: #000;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    .view-site-btn {
+      background: #222;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: #141414;
+      border: 1px solid var(--card-border);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      gap: 4px;
+    }
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 10px 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--accent);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Card Panels */
+    .panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    /* Scoreboard Box */
+    .scoreboard-box {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      background: #111;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid #222;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .team-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #eee;
+      margin-bottom: 8px;
+    }
+    .score-number {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .vs-label {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* Quick Score Controls */
+    .score-controls {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .btn-score {
+      background: #252525;
+      border: 1px solid #333;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .btn-score:active {
+      background: var(--accent);
+      color: #000;
+      transform: scale(0.95);
+    }
+    .btn-score.minus {
+      color: var(--danger);
+    }
+
+    /* Toggle Switch */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #222;
+      margin-bottom: 16px;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #333;
+      transition: .3s;
+      border-radius: 26px;
+    }
+    .slider:before {
+      position: absolute; content: "";
+      height: 20px; width: 20px;
+      left: 3px; bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--accent); }
+    input:checked + .slider:before {
+      transform: translateX(22px);
+      background-color: #000;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-input {
+      width: 100%;
+      background: #121212;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--accent);
+    }
+
+    /* Buttons */
+    .btn-save {
+      width: 100%;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(199, 248, 73, 0.3);
+      margin-top: 10px;
+    }
+    .btn-save:active {
+      transform: scale(0.98);
+      background: var(--accent-hover);
+    }
+
+    /* Match List */
+    .match-item {
+      background: #121212;
+      border: 1px solid #242424;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .match-teams {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .match-info {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .btn-delete {
+      background: rgba(255, 71, 87, 0.15);
+      border: 1px solid rgba(255, 71, 87, 0.3);
+      color: var(--danger);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Toast notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e1e1e;
+      border: 1px solid var(--accent);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-title">REBELS FLAG</div>
+      <span class="brand-badge">Admin Móvil</span>
+    </div>
+    <a href="./index.html" class="view-site-btn">
+      <span>Ver Web</span> ↗
+    </a>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('tab-live')">⚡ En Vivo</button>
+    <button class="tab-btn" onclick="switchTab('tab-next')">📅 Próximo</button>
+    <button class="tab-btn" onclick="switchTab('tab-matches')">📋 Calendario</button>
+    <button class="tab-btn" onclick="switchTab('tab-firebase')">🔥 Firebase</button>
+  </div>
+
+  <!-- TAB 1: Marcador En Vivo -->
+  <div id="tab-live" class="panel active">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Marcador En Directo</span>
+        <span style="color: var(--accent); font-size: 12px; font-weight: 700;">● TIEMPO REAL</span>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <strong style="display:block; font-size: 14px;">Activar Marcador en la Web</strong>
+          <span style="font-size: 12px; color: var(--text-muted);">Muestra la barra flotante con marcador en vivo a los fans</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="live-toggle" onchange="toggleLiveStatus()">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Periodo / Estado actual</label>
+        <input type="text" id="live-period" class="form-input" value="1st Half" placeholder="Ej. 1st Half, 2nd Half, Final">
+      </div>
+
+      <div class="scoreboard-box">
+        <div>
+          <div class="team-name" id="display-team1-name">Conquerors</div>
+          <div class="score-number" id="team1-score">18</div>
+          <div class="score-controls">
+            <button class="btn-score" onclick="addScore(1, 1)">+1</button>
+            <button class="btn-score" onclick="addScore(1, 3)">+3</button>
+            <button class="btn-score" onclick="addScore(1, 6)">+6</button>
+            <button class="btn-score minus" onclick="addScore(1, -1)">-1</button>
+          </div>
+        </div>
+
+        <div class="vs-label">VS</div>
+
+        <div>
+          <div class="team-name" id="display-team2-name">Sky Strikers</div>
+          <div class="score-number" id="team2-score">14</div>
+          <div class="score-controls">
+            <button class="btn-score" onclick="addScore(2, 1)">+1</button>
+            <button class="btn-score" onclick="addScore(2, 3)">+3</button>
+            <button class="btn-score" onclick="addScore(2, 6)">+6</button>
+            <button class="btn-score minus" onclick="addScore(2, -1)">-1</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-save" onclick="saveLiveScore()">
+        <span>💾 Actualizar Marcador en Vivo</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TAB 2: Próximo Partido & Countdown -->
+  <div id="tab-next" class="panel">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Próximo Partido (Countdown)</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Texto Ticker Superior</label>
+        <input type="text" id="ticker-text" class="form-input" value="Next: Tigers vs Flash Flames">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Equipo Local (Home)</label>
+        <input type="text" id="next-team1" class="form-input" value="Conquerors Club">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Equipo Visitante (Away)</label>
+        <input type="text" id="next-team2" class="form-input" value="Sky Strikers">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Fecha y Hora del Partido (Para cuenta regresiva)</label>
+        <input type="datetime-local" id="next-datetime" class="form-input">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Ubicación / Estadio</label>
+        <input type="text" id="next-location" class="form-input" value="Olympus Stadium, Arena 1">
+      </div>
+
+      <button class="btn-save" onclick="saveNextMatch()">
+        <span>💾 Guardar Próximo Partido</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TAB 3: Calendario & Resultados -->
+  <div id="tab-matches" class="panel">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Agregar Partido Futuro</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ciudad / Lugar</label>
+        <input type="text" id="new-city" class="form-input" placeholder="Ej. Dallas, TX">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Fecha Mostrada</label>
+        <input type="text" id="new-date" class="form-input" placeholder="Ej. 25 May">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Equipo Local</label>
+        <input type="text" id="new-home" class="form-input" placeholder="Rebels Flag">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Equipo Visitante</label>
+        <input type="text" id="new-away" class="form-input" placeholder="Titans Club">
+      </div>
+      <button class="btn-save" onclick="addFutureMatch()">
+        <span>➕ Agregar al Calendario</span>
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Partidos Programados</span>
+      </div>
+      <div id="matches-list">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: Configuración Firebase (Gratis) -->
+  <div id="tab-firebase" class="panel">
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Conexión Firebase (Opcional)</span>
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px;">
+        Por defecto, los cambios se guardan localmente al instante (100% gratuito). Si deseas sincronizar la web en vivo entre tu celular y computadoras de todo el mundo mediante Firebase Spark (gratuito de por vida), pega tu configuración de Firebase Console abajo:
+      </p>
+
+      <div class="form-group">
+        <label class="form-label">API Key</label>
+        <input type="text" id="fb-apiKey" class="form-input" placeholder="AIzaSy...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Project ID</label>
+        <input type="text" id="fb-projectId" class="form-input" placeholder="rebels-flag-sports">
+      </div>
+      <div class="form-group">
+        <label class="form-label">App ID</label>
+        <input type="text" id="fb-appId" class="form-input" placeholder="1:123456789:web:abcdef">
+      </div>
+
+      <button class="btn-save" onclick="saveFirebaseConfig()">
+        <span>🔥 Conectar Firebase</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast">
+    <span style="color: var(--accent);">✓</span>
+    <span id="toast-msg">Actualizado con éxito</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./js/firebase-config.js"></script>
+  <script>
+    let appData = null;
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    async function initAdmin() {
+      appData = await window.SportsDB.getData();
+
+      // Set live values
+      document.getElementById('live-toggle').checked = appData.liveScore.isLive;
+      document.getElementById('live-period').value = appData.liveScore.period || "1st Half";
+      document.getElementById('team1-score').textContent = appData.liveScore.team1Score || 0;
+      document.getElementById('team2-score').textContent = appData.liveScore.team2Score || 0;
+
+      // Set next match values
+      document.getElementById('display-team1-name').textContent = appData.nextMatch.team1.name;
+      document.getElementById('display-team2-name').textContent = appData.nextMatch.team2.name;
+      document.getElementById('ticker-text').value = appData.nextMatch.tickerText || "";
+      document.getElementById('next-team1').value = appData.nextMatch.team1.name;
+      document.getElementById('next-team2').value = appData.nextMatch.team2.name;
+      document.getElementById('next-location').value = appData.nextMatch.location || "";
+
+      if (appData.nextMatch.matchDate) {
+        const d = new Date(appData.nextMatch.matchDate);
+        const localIso = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+        document.getElementById('next-datetime').value = localIso;
+      }
+
+      renderMatchesList();
+    }
+
+    function addScore(teamNum, points) {
+      if (teamNum === 1) {
+        appData.liveScore.team1Score = Math.max(0, (appData.liveScore.team1Score || 0) + points);
+        document.getElementById('team1-score').textContent = appData.liveScore.team1Score;
+      } else {
+        appData.liveScore.team2Score = Math.max(0, (appData.liveScore.team2Score || 0) + points);
+        document.getElementById('team2-score').textContent = appData.liveScore.team2Score;
+      }
+    }
+
+    function toggleLiveStatus() {
+      appData.liveScore.isLive = document.getElementById('live-toggle').checked;
+      window.SportsDB.saveData(appData);
+      showToast(appData.liveScore.isLive ? "Marcador en vivo ACTIVADO" : "Marcador en vivo desactivado");
+    }
+
+    async function saveLiveScore() {
+      appData.liveScore.isLive = document.getElementById('live-toggle').checked;
+      appData.liveScore.period = document.getElementById('live-period').value;
+      appData.liveScore.team1Score = parseInt(document.getElementById('team1-score').textContent, 10);
+      appData.liveScore.team2Score = parseInt(document.getElementById('team2-score').textContent, 10);
+
+      await window.SportsDB.saveData(appData);
+      showToast("Marcador actualizado en vivo");
+    }
+
+    async function saveNextMatch() {
+      appData.nextMatch.tickerText = document.getElementById('ticker-text').value;
+      appData.nextMatch.team1.name = document.getElementById('next-team1').value;
+      appData.nextMatch.team2.name = document.getElementById('next-team2').value;
+      appData.nextMatch.location = document.getElementById('next-location').value;
+
+      const dtVal = document.getElementById('next-datetime').value;
+      if (dtVal) {
+        appData.nextMatch.matchDate = new Date(dtVal).toISOString();
+      }
+
+      document.getElementById('display-team1-name').textContent = appData.nextMatch.team1.name;
+      document.getElementById('display-team2-name').textContent = appData.nextMatch.team2.name;
+
+      await window.SportsDB.saveData(appData);
+      showToast("Próximo partido y cuenta regresiva guardados");
+    }
+
+    function renderMatchesList() {
+      const container = document.getElementById('matches-list');
+      if (!appData.futureMatches || !appData.futureMatches.length) {
+        container.innerHTML = '<p style="color:#777; font-size:13px;">No hay partidos programados.</p>';
+        return;
+      }
+
+      container.innerHTML = appData.futureMatches.map((m, idx) => `
+        <div class="match-item">
+          <div>
+            <div class="match-teams">${m.homeTeam} vs ${m.awayTeam}</div>
+            <div class="match-info">${m.city} • ${m.date}</div>
+          </div>
+          <button class="btn-delete" onclick="deleteMatch(${idx})">Eliminar</button>
+        </div>
+      `).join('');
+    }
+
+    async function addFutureMatch() {
+      const city = document.getElementById('new-city').value.trim();
+      const date = document.getElementById('new-date').value.trim();
+      const home = document.getElementById('new-home').value.trim();
+      const away = document.getElementById('new-away').value.trim();
+
+      if (!home || !away) {
+        alert("Ingresa los nombres de ambos equipos");
+        return;
+      }
+
+      appData.futureMatches = appData.futureMatches || [];
+      appData.futureMatches.push({
+        id: "m_" + Date.now(),
+        city: city || "Estadio Principal",
+        date: date || "Próximamente",
+        homeTeam: home,
+        awayTeam: away,
+        status: "Upcoming"
+      });
+
+      await window.SportsDB.saveData(appData);
+      renderMatchesList();
+
+      document.getElementById('new-city').value = '';
+      document.getElementById('new-date').value = '';
+      document.getElementById('new-home').value = '';
+      document.getElementById('new-away').value = '';
+      showToast("Partido agregado al calendario");
+    }
+
+    async function deleteMatch(index) {
+      if (confirm("¿Seguro que deseas eliminar este partido?")) {
+        appData.futureMatches.splice(index, 1);
+        await window.SportsDB.saveData(appData);
+        renderMatchesList();
+        showToast("Partido eliminado");
+      }
+    }
+
+    function saveFirebaseConfig() {
+      const apiKey = document.getElementById('fb-apiKey').value.trim();
+      const projectId = document.getElementById('fb-projectId').value.trim();
+      const appId = document.getElementById('fb-appId').value.trim();
+
+      if (!apiKey || !projectId) {
+        alert("Ingresa al menos la API Key y el Project ID de tu proyecto Firebase");
+        return;
+      }
+
+      localStorage.setItem("custom_firebase_config", JSON.stringify({
+        apiKey, projectId, appId,
+        authDomain: `${projectId}.firebaseapp.com`
+      }));
+
+      showToast("Configuración Firebase guardada");
+    }
+
+    document.addEventListener('DOMContentLoaded', initAdmin);
+  </script>
+</body>
+</html>
