@@ -7,7 +7,7 @@
   --token-1b548128-02bc-4d93-99ae-e88ffe080711: #0a192f !important;
 }
 
-/* 2. Hero Headline Text Override (so React doesn't overwrite your phrase) */
+/* 2. Hero Headline Text Override */
 [data-framer-name="Title"] h1 {
   font-size: 0 !important;
   line-height: 0 !important;
@@ -36,7 +36,7 @@
   }
 }
 
-/* 3. Hero Image Override (forces your Imgur photo) */
+/* 3. Hero Image Override */
 [data-framer-name="Image Wrapper"] img,
 [data-framer-name="Gap Block Bottom"] img {
   content: url("../framerusercontent.com/images/rebels_hero.jpg") !important;
@@ -60,78 +60,132 @@
 #rebels-live-scoreboard .live-title, #rebels-live-scoreboard strong {
   color: #00d2ff !important;
 }
-/* SPONSORS CAROUSEL SECTION */
-.sponsors-section {
+
+/* =========================================================
+   6. REBELS SPONSORS MARQUEE (ENTRE HERO Y PRÓXIMO PARTIDO)
+   ========================================================= */
+.rebels-sponsors-bar {
   width: 100%;
-  background: #090909;
-  border-top: 1px solid var(--token-efcf8159-8455-43d8-8d8c-d3895d69ecf1, #262626);
-  border-bottom: 1px solid var(--token-efcf8159-8455-43d8-8d8c-d3895d69ecf1, #262626);
-  padding: 36px 0;
+  background: #080808;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 30px 0 24px;
   overflow: hidden;
   position: relative;
+  z-index: 50;
 }
 
-.sponsors-title {
+.rebels-sponsors-label {
   text-align: center;
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--token-5b9e2bdb-fb42-4b70-afbd-11869d027423, #8f8f8f);
-  margin-bottom: 24px;
+  color: #666666;
+  margin-bottom: 20px;
 }
 
-.sponsors-track {
+.rebels-sponsors-marquee {
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  width: max-content;
-  animation: scrollSponsors 24s linear infinite;
-  gap: 60px;
-  align-items: center;
 }
 
-.sponsors-track:hover {
+.rebels-sponsors-track {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  width: max-content;
+  animation: marqueeRoll 28s linear infinite;
+  padding-left: 40px;
+}
+
+.rebels-sponsors-track:hover {
   animation-play-state: paused;
 }
 
-@keyframes scrollSponsors {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes marqueeRoll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
 }
 
-.sponsor-item {
+.sponsor-card {
   display: flex;
   align-items: center;
-  gap: 14px;
-  opacity: 0.7;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 24px;
   transition: all 0.3s ease;
-  cursor: pointer;
-  white-space: nowrap;
+  position: relative;
 }
 
-.sponsor-item:hover {
-  opacity: 1;
+.sponsor-card:hover {
+  background: rgba(0, 210, 255, 0.06);
+  border-color: rgba(0, 210, 255, 0.3);
   transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 210, 255, 0.15);
 }
 
-.sponsor-icon {
-  font-size: 24px;
+.sponsor-card.main-sponsor {
+  border-color: rgba(0, 210, 255, 0.4);
+  background: rgba(0, 210, 255, 0.05);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.12);
 }
 
-.sponsor-name {
+.sponsor-badge {
+  position: absolute;
+  top: -9px;
+  right: 12px;
+  background: #00d2ff;
+  color: #000;
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 20px;
   font-weight: 800;
-  color: #ffffff;
-  letter-spacing: 1px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 4px;
 }
 
-.sponsor-tag {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--token-4846de85-d59f-4c4f-b238-cad5652fda1a, #00d2ff);
-  background: rgba(0, 210, 255, 0.1);
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid rgba(0, 210, 255, 0.2);
+.sponsor-img-main {
+  height: 52px;
+  max-width: 170px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: brightness(1.05);
+}
+
+.sponsor-img {
+  height: 44px;
+  max-width: 140px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.sponsor-card:hover .sponsor-img {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .rebels-sponsors-track {
+    gap: 40px;
+    animation-duration: 20s;
+  }
+  .sponsor-img-main {
+    height: 42px;
+  }
+  .sponsor-img {
+    height: 36px;
+  }
 }
