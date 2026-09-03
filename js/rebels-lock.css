@@ -62,14 +62,14 @@
 }
 
 /* =========================================================
-   6. REBELS SPONSORS MARQUEE (ENTRE HERO Y PRÓXIMO PARTIDO)
+   6. REBELS SPONSORS MARQUEE (PUROS LOGOS / CERO TARJETAS)
    ========================================================= */
 .rebels-sponsors-bar {
   width: 100%;
-  background: #080808;
+  background: #090909;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 30px 0 24px;
+  padding: 34px 0;
   overflow: hidden;
   position: relative;
   z-index: 50;
@@ -81,9 +81,9 @@
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   color: #666666;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .rebels-sponsors-marquee {
@@ -95,10 +95,10 @@
 .rebels-sponsors-track {
   display: flex;
   align-items: center;
-  gap: 80px;
+  gap: 90px;
   width: max-content;
-  animation: marqueeRoll 28s linear infinite;
-  padding-left: 40px;
+  animation: marqueeRoll 25s linear infinite;
+  padding-left: 50px;
 }
 
 .rebels-sponsors-track:hover {
@@ -114,78 +114,50 @@
   }
 }
 
-.sponsor-card {
+.sponsor-solo-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 12px 24px;
-  transition: all 0.3s ease;
-  position: relative;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.sponsor-card:hover {
-  background: rgba(0, 210, 255, 0.06);
-  border-color: rgba(0, 210, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 210, 255, 0.15);
+.sponsor-solo-wrap:hover {
+  transform: scale(1.1);
 }
 
-.sponsor-card.main-sponsor {
-  border-color: rgba(0, 210, 255, 0.4);
-  background: rgba(0, 210, 255, 0.05);
-  box-shadow: 0 0 20px rgba(0, 210, 255, 0.12);
-}
-
-.sponsor-badge {
-  position: absolute;
-  top: -9px;
-  right: 12px;
-  background: #00d2ff;
-  color: #000;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 2px 7px;
-  border-radius: 4px;
-}
-
-.sponsor-img-main {
+.sponsor-solo-img {
   height: 52px;
-  max-width: 170px;
+  max-width: 160px;
   width: auto;
   object-fit: contain;
   display: block;
-  filter: brightness(1.05);
-}
-
-.sponsor-img {
-  height: 44px;
-  max-width: 140px;
-  width: auto;
-  object-fit: contain;
-  display: block;
+  filter: brightness(0.9) contrast(1.1);
   opacity: 0.85;
-  transition: opacity 0.2s;
+  transition: all 0.3s ease;
 }
 
-.sponsor-card:hover .sponsor-img {
+.sponsor-solo-img.main {
+  height: 65px;
+  max-width: 190px;
+  filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.35)) brightness(1);
   opacity: 1;
+}
+
+.sponsor-solo-wrap:hover .sponsor-solo-img {
+  opacity: 1;
+  filter: drop-shadow(0 0 16px rgba(0, 210, 255, 0.5)) brightness(1.1);
 }
 
 @media (max-width: 768px) {
   .rebels-sponsors-track {
-    gap: 40px;
-    animation-duration: 20s;
+    gap: 50px;
+    animation-duration: 18s;
   }
-  .sponsor-img-main {
-    height: 42px;
+  .sponsor-solo-img.main {
+    height: 48px;
   }
-  .sponsor-img {
-    height: 36px;
+  .sponsor-solo-img {
+    height: 38px;
   }
 }
