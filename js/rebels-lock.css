@@ -1,34 +1,17 @@
-/* REBELS THEME: Azul Rayo & Hero Customizations on Original Template */
+/* =========================================================
+   REBELS FLAG FOOTBALL CLUB - MASTER DESIGN SYSTEM
+   ========================================================= */
 
-/* 1. Global Color Tokens: Azul Rayo */
+/* 1. Global Color Tokens: Azul Rayo & Dark Mode */
 :root, body, #main {
   --token-4846de85-d59f-4c4f-b238-cad5652fda1a: #00d2ff !important;
   --token-c1fd598a-a8c6-4c58-86f6-691db815bc7a: #0099ff !important;
   --token-1b548128-02bc-4d93-99ae-e88ffe080711: #0a192f !important;
 }
 
-/* 2. Hero Headline Text Override */
-
-
-
-
-@media (max-width: 1200px) {
-  
-}
-
-@media (max-width: 800px) {
-  
-}
-
-/* 3. Hero Image Override */
-[data-framer-name="Image Wrapper"] img,
-[data-framer-name="Gap Block Bottom"] img {
-  content: url("../framerusercontent.com/images/rebels_hero.jpg") !important;
-  object-fit: cover !important;
-}
-
-/* 4. Logo Override: Official logo_rebel.png */
+/* 2. Logo Oficial de Rebels */
 [data-framer-name="Default"] [data-framer-background-image-wrapper="true"] img,
+[data-framer-name="Phone"] img[alt="Logo"],
 .framer-uhmzak img {
   content: url("../framerusercontent.com/images/logo_rebel.png") !important;
   max-height: 38px !important;
@@ -36,7 +19,22 @@
   object-fit: contain !important;
 }
 
-/* 5. Live Scoreboard badge */
+/* 3. Hero Image Oficial */
+[data-framer-name="Image Wrapper"] img,
+[data-framer-name="Gap Block Bottom"] img {
+  content: url("../framerusercontent.com/images/rebels_hero.jpg") !important;
+  object-fit: cover !important;
+}
+
+/* 4. Imagen Motivacional "Rendirse no es una opcion" */
+img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
+[data-framer-name*="Giving"] img {
+  content: url("../framerusercontent.com/images/giving_up_bg.jpg") !important;
+  object-fit: cover !important;
+  object-position: 50% 18% !important;
+}
+
+/* 5. Live Scoreboard Badge */
 #rebels-live-scoreboard {
   border-color: #00d2ff !important;
   box-shadow: 0 10px 35px rgba(0, 210, 255, 0.4) !important;
@@ -45,15 +43,13 @@
   color: #00d2ff !important;
 }
 
-/* =========================================================
-   6. REBELS SPONSORS MARQUEE (PUROS LOGOS / CERO TARJETAS)
-   ========================================================= */
+/* 6. Banner de Sponsors Marquee (Puros Logos) */
 .rebels-sponsors-bar {
   width: 100%;
   background: #090909;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 34px 0;
+  padding: 30px 0;
   overflow: hidden;
   position: relative;
   z-index: 50;
@@ -67,7 +63,7 @@
   text-transform: uppercase;
   letter-spacing: 2.5px;
   color: #666666;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .rebels-sponsors-marquee {
@@ -79,10 +75,10 @@
 .rebels-sponsors-track {
   display: flex;
   align-items: center;
-  gap: 90px;
+  gap: 80px;
   width: max-content;
   animation: marqueeRoll 25s linear infinite;
-  padding-left: 50px;
+  padding-left: 40px;
 }
 
 .rebels-sponsors-track:hover {
@@ -90,12 +86,8 @@
 }
 
 @keyframes marqueeRoll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.333333%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333333%); }
 }
 
 .sponsor-solo-wrap {
@@ -111,8 +103,8 @@
 }
 
 .sponsor-solo-img {
-  height: 52px;
-  max-width: 160px;
+  height: 48px;
+  max-width: 150px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -122,8 +114,8 @@
 }
 
 .sponsor-solo-img.main {
-  height: 65px;
-  max-width: 190px;
+  height: 60px;
+  max-width: 180px;
   filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.35)) brightness(1);
   opacity: 1;
 }
@@ -133,369 +125,54 @@
   filter: drop-shadow(0 0 16px rgba(0, 210, 255, 0.5)) brightness(1.1);
 }
 
-@media (max-width: 768px) {
-  .rebels-sponsors-track {
-    gap: 50px;
-    animation-duration: 18s;
-  }
-  .sponsor-solo-img.main {
-    height: 48px;
-  }
-  .sponsor-solo-img {
-    height: 38px;
-  }
-}
-
-
-/* FORZAR IMAGEN DE RENDIRSE NO ES UNA OPCION */
-[data-framer-name="Giving Up Section"] img,
-[data-framer-name*="Giving"] img,
-[data-framer-name*="Podcast"] img,
-section:has(h2:contains("Rendirse")) img {
-  content: url("../framerusercontent.com/images/giving_up_bg.jpg") !important;
-  object-fit: cover !important;
-}
-
-img[src*="3dXBAHhm76u1pJcR0ZBuUxA9uhA"],
-[data-framer-name*="Giving"] img {
-  content: url("../framerusercontent.com/images/giving_up_bg.jpg") !important;
-  object-fit: cover !important;
-  object-position: 50% 18% !important;
-}
 /* =========================================================
-   REBELS MOBILE RESPONSIVE ENHANCEMENTS & DRAWER MENU
+   7. ADAPTACIÓN RESPONSIVE ELEGANTE Y LIMPIA PARA MÓVILES
    ========================================================= */
-
-@media (max-width: 991px) {
-  /* 1. Navbar & Header */
-  .framer-MQpCu, .framer-XemAD, nav {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* Asegurar logo visible y proporcionado en móvil */
-  [data-framer-name="Default"] [data-framer-background-image-wrapper="true"] img,
-  .framer-uhmzak img {
-    max-height: 32px !important;
-    max-width: 120px !important;
-  }
-
-  /* 2. Hero Section Mobile Optimization */
-  
-
-  /* Ajuste de paddings para que nada se desborde */
-  [data-framer-name="Banner Section"],
-  [data-framer-name="Text Wrapper"],
-  [data-framer-name="Title Wrapper"] {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Imagen de Hero en móvil: tamaño y proporción perfectos */
-  [data-framer-name="Image Wrapper"],
-  [data-framer-name="Gap Block Bottom"] {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 340px !important;
-    max-height: 460px !important;
-  }
-
-  [data-framer-name="Image Wrapper"] img,
-  [data-framer-name="Gap Block Bottom"] img {
-    height: 100% !important;
-    width: 100% !important;
-    object-fit: cover !important;
-    object-position: center top !important;
-  }
-
-  /* 3. Botones Hero en móvil: apilados o con touch target cómodo */
-  [data-framer-name="Buttons Wrapper"] {
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 12px !important;
-  }
-
-  [data-framer-name="Buttons Wrapper"] a,
-  [data-framer-name="Buttons Wrapper"] button {
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-    padding: 14px 20px !important;
-  }
-
-  /* 4. Ticker superior móvil */
-  .framer-70Sgs, [data-framer-name="Banner Section"] .framer-1fh6fq3 {
-    flex-wrap: wrap !important;
-    gap: 8px !important;
-    font-size: 12px !important;
-  }
-
-  /* 5. Countdown / Próximo Partido móvil */
-  [data-framer-name="Countdown Section"] {
-    padding: 30px 16px !important;
-  }
-
-  [data-framer-name="Countdown Wrapper"],
-  [data-framer-name="Top Wrapper"],
-  [data-framer-name="Bottom Wrapper"] {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 20px !important;
+@media (max-width: 991.98px) {
+  /* Evitar cualquier desborde horizontal en móviles */
+  html, body {
+    overflow-x: hidden !important;
     width: 100% !important;
   }
 
-  /* Cajas de cuenta regresiva (DÍAS, HORAS, MINUTOS, SEGUNDOS) */
-  [data-framer-name="Bottom Wrapper"] > div {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 8px !important;
-    width: 100% !important;
-    max-width: 360px !important;
-    margin: 0 auto !important;
+  /* El texto SIEMPRE debe tener espacio horizontal normal y no romperse letra por letra */
+  p, h1, h2, h3, h4, h5, h6, span, a, div {
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
   }
 
-  /* 6. Banner de Sponsors Móvil */
+  /* Ajustar tamaño de título Hero en pantallas móviles */
+  [data-framer-name="Title"] h1,
+  h1.framer-styles-preset-lx00h8 {
+    font-size: 44px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -1.5px !important;
+  }
+
+  /* Ajuste de los sponsors en móvil */
   .rebels-sponsors-bar {
-    padding: 24px 0 !important;
+    padding: 22px 0 !important;
   }
   .rebels-sponsors-track {
     gap: 45px !important;
     animation-duration: 18s !important;
   }
   .sponsor-solo-img.main {
-    height: 46px !important;
+    height: 44px !important;
     max-width: 130px !important;
   }
   .sponsor-solo-img {
     height: 34px !important;
-    max-width: 105px !important;
-  }
-
-  /* 7. Sección de Rendirse no es una opción móvil */
-  [data-framer-name*="Giving"] h2 {
-    font-size: 32px !important;
-    line-height: 1.1 !important;
-  }
-
-  /* 8. Tarjetas de Partidos y Tienda Móvil */
-  [data-framer-name="Cards Wrapper"],
-  [data-framer-name="Results Wrapper"],
-  [data-framer-name="Collections Wrapper"] {
-    grid-template-columns: 1fr !important;
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 16px !important;
-  }
-
-  /* 9. Footer móvil */
-  [data-framer-name="Nav Wrapper"],
-  [data-framer-name="Copyright Wrapper"] {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 16px !important;
-    align-items: center !important;
-  }
-}
-
-/* Teléfonos muy compactos (iPhone SE, Galaxy A, etc. < 480px) */
-@media (max-width: 480px) {
-  
-  .rebels-sponsors-label {
-    font-size: 10px !important;
-    letter-spacing: 1.5px !important;
-  }
-  [data-framer-name="Bottom Wrapper"] > div {
-    gap: 6px !important;
-  }
-}
-
-/* Hero H1 Typography: Native, elegant and responsive */
-h1.framer-styles-preset-lx00h8,
-[data-framer-name="Title"] h1 {
-  font-family: 'Bricolage Grotesque', sans-serif !important;
-  font-weight: 800 !important;
-  line-height: 1.0 !important;
-  letter-spacing: -1.5px !important;
-  display: block !important;
-  color: #ffffff !important;
-}
-
-@media (max-width: 991px) {
-  h1.framer-styles-preset-lx00h8,
-  [data-framer-name="Title"] h1 {
-    font-size: 38px !important;
-    line-height: 1.05 !important;
-    letter-spacing: -1px !important;
+    max-width: 100px !important;
   }
 }
 
 @media (max-width: 480px) {
-  h1.framer-styles-preset-lx00h8,
-  [data-framer-name="Title"] h1 {
-    font-size: 32px !important;
-    line-height: 1.08 !important;
-  }
-}
-/* =========================================================
-   REBELS NATIVE MOBILE ADAPTATION (PERFECT MOBILE UX)
-   ========================================================= */
-
-@media (max-width: 991.98px) {
-  /* Mostrar vista Phone nativa y ocultar Desktop */
-  .hidden-12oqjth {
-    display: none !important;
-  }
-  .hidden-181a6jm {
-    display: none !important;
-  }
-
-  /* Asegurar que la barra de navegación móvil sea sticky y limpia */
-  [data-framer-name="Phone"] {
-    display: flex !important;
-    width: 100% !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 1000 !important;
-    background-color: #0e0e0e !important;
-    border-bottom: 1px solid #222222 !important;
-    padding: 10px 16px !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Logo Rebels proporcionado en la barra móvil */
-  [data-framer-name="Phone"] [data-framer-name="Default"] [data-framer-background-image-wrapper="true"] img,
-  [data-framer-name="Phone"] img[alt="Logo"],
-  .framer-uhmzak img {
-    content: url("../framerusercontent.com/images/logo_rebel.png") !important;
-    max-height: 28px !important;
-    width: auto !important;
-    object-fit: contain !important;
-    opacity: 1 !important;
-    display: block !important;
-  }
-
-  /* Icono hamburguesa / menú en móvil */
-  [data-framer-name="Phone"] svg {
-    stroke: #ffffff !important;
-    fill: #ffffff !important;
-  }
-
-  /* Hero Section: En columna vertical limpia */
-  [data-framer-name="Banner Section"] {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    padding: 0 !important;
-  }
-
-  [data-framer-name="Text Wrapper"] {
-    padding: 32px 20px 24px !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Tipografía Hero: Tamaño armónico en móvil (34px) */
-  h1.framer-styles-preset-lx00h8,
-  [data-framer-name="Title"] h1 {
+  [data-framer-name="Title"] h1,
+  h1.framer-styles-preset-lx00h8 {
     font-size: 34px !important;
     line-height: 1.08 !important;
     letter-spacing: -1px !important;
-    margin-bottom: 16px !important;
-  }
-
-  /* Subtítulo */
-  [data-framer-name="Title & Buttons Wrapper"] h2,
-  [data-framer-name="Title & Buttons Wrapper"] p {
-    font-size: 15px !important;
-    line-height: 1.5 !important;
-  }
-
-  /* Botones Hero: touch-targets cómodos */
-  [data-framer-name="Buttons Wrapper"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    width: 100% !important;
-    margin-top: 24px !important;
-  }
-
-  [data-framer-name="Buttons Wrapper"] a,
-  [data-framer-name="Buttons Wrapper"] button,
-  .framer-1iarows-container a {
-    width: 100% !important;
-    text-align: center !important;
-    padding: 14px 20px !important;
-    border-radius: 8px !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Imagen Hero: Altura ideal en pantalla de teléfono */
-  [data-framer-name="Image Wrapper"],
-  [data-framer-name="Gap Block Bottom"] {
-    width: 100% !important;
-    height: 380px !important;
-    max-height: 50vh !important;
-    overflow: hidden !important;
-  }
-
-  [data-framer-name="Image Wrapper"] img,
-  [data-framer-name="Gap Block Bottom"] img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center top !important;
-  }
-
-  /* Cuenta regresiva en móvil: 4 columnas simétricas */
-  [data-framer-name="Countdown Section"] {
-    padding: 30px 16px !important;
-  }
-
-  [data-framer-name="Countdown Wrapper"],
-  [data-framer-name="Top Wrapper"],
-  [data-framer-name="Bottom Wrapper"] {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    width: 100% !important;
-  }
-
-  [data-framer-name="Bottom Wrapper"] > div {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 8px !important;
-    width: 100% !important;
-    max-width: 340px !important;
-    margin: 16px auto 0 !important;
-  }
-
-  /* Tarjetas de partidos y resultados en 1 columna vertical */
-  [data-framer-name="Cards Wrapper"],
-  [data-framer-name="Results Wrapper"],
-  [data-framer-name="Collections Wrapper"] {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 16px !important;
-    padding: 0 16px !important;
-    box-sizing: border-box !important;
-  }
-}
-
-/* Pantallas súper compactas (< 400px) */
-@media (max-width: 400px) {
-  h1.framer-styles-preset-lx00h8,
-  [data-framer-name="Title"] h1 {
-    font-size: 28px !important;
-  }
-  [data-framer-name="Image Wrapper"],
-  [data-framer-name="Gap Block Bottom"] {
-    height: 300px !important;
   }
 }
